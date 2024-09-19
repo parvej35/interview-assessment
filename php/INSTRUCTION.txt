@@ -1,0 +1,31 @@
+Project Structure:
+
+/interview-assessment
+├── php
+│    ├── /src
+│    │     ├── Container.php
+│    │     ├── Logger.php
+│    │     ├── Service.php
+│    │     ├── ServiceA.php
+│    │     ├── ServiceB.php
+│    ├── /tests
+│    │     ├── ContainerTest.php
+│    ├── composer.json
+│    ├── index.php (main file)
+│    ├── INSTRUCTION.txt
+│    ├── README.txt
+
+
+Step: How to run the application:
+
+1) Go to the 'php' directory of the project:
+    cd /path/to/php/directory
+
+2) Install composer:
+   composer install
+
+3) Run the application:
+    php -S localhost:8000
+
+4) Run the test cases:
+    vendor/bin/phpunit tests
