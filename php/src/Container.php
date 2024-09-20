@@ -76,16 +76,16 @@ class Container
      * Instead of letting the container automatically resolve and create the service,
      * we explicitly define how the service is created using the factory function.
      *
-     * @param string $name The service name.
+     * @param string $name The service class name.
      * @param callable $factory The factory function to create the service.
      * @param bool $isTransient Whether the service should be transient.
      * @return void
      */
-    public function registerFactory(string $name, callable $factory, bool $isTransient = false): void
+    public function registerFactory(string $class, callable $factory, bool $isTransient = false): void
     {
-        $this->services[$name] = $factory;
+        $this->services[$class] = $factory;
         if ($isTransient) {
-            $this->transientServices[$name] = true;
+            $this->transientServices[$class] = true;
         }
     }
 
@@ -105,7 +105,7 @@ class Container
     /*
      * Function to retrieve a service from the container.
      *
-     * @param string $name The service name.
+     * @param string $name The service class name.
      * @return mixed The resolved service.
      */
     public function get(string $name): mixed
@@ -147,6 +147,8 @@ class Container
     private function resolve(string $class): object
     {
         //The ReflectionClass creates a reflection object for the given class.
+        //The ReflectionClass class reports information about a class.
+
         //https://www.php.net/manual/en/class.reflectionclass.php
         $reflector = new ReflectionClass($class);
 
@@ -175,6 +177,8 @@ class Container
             }*/
 
             $type = $param->getType();
+            echo "Type: " . $type . "\n";
+            echo "Type name: " . $type->getName() . "\n";
 
             // Check if the type is not null and is a class (not a built-in type)
             if ($type && !$type->isBuiltin()) {
@@ -184,6 +188,8 @@ class Container
             }
         }
 
+        //Creates a new class instance from given arguments
+        //https://www.php.net/manual/en/reflectionclass.newinstanceargs.php
         return $reflector->newInstanceArgs($dependencies);
     }
 }
