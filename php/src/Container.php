@@ -177,8 +177,8 @@ class Container
             }*/
 
             $type = $param->getType();
-            echo "Type: " . $type . "\n";
-            echo "Type name: " . $type->getName() . "\n";
+            //echo "Type: " . $type . "\n";
+            //echo "Type name: " . $type->getName() . "\n";
 
             // Check if the type is not null and is a class (not a built-in type)
             if ($type && !$type->isBuiltin()) {
